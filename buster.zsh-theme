@@ -1,4 +1,4 @@
-# Custom zsh theme
+# Custom zsh theme by Grant Buster
 
 COLOR=066
 
