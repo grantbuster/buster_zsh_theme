@@ -1,3 +1,5 @@
+# Custom zsh theme
+
 COLOR=066
 
 set_color() {
@@ -5,11 +7,19 @@ set_color() {
 }
 
 reset() {
-	echo "%f%b"
+	echo "%f%k%b"
+}
+
+chyph() {
+    echo "$(set_color)━$(reset)"
 }
 
 inbracket() {
 	echo "$(set_color)[$(reset)$1$(set_color)]$(reset)"
+}
+
+inbox() {
+	echo "$(set_color)┫$(reset)$1$(set_color)┣$(reset)"
 }
 
 conda_prompt_info() {
@@ -32,18 +42,8 @@ function fill-line() {
     local left_len=$(prompt-length $1)
     local right_len=$(prompt-length $2)
     local pad_len=$((COLUMNS - left_len - right_len - 1))
-    local pad=${(pl.$pad_len.. .)}  # pad_len spaces
-    echo ${1}${pad}${2}
-}
-
-function set-prompt() {
-    local top_left="$(set_color)┌$(hardware)-$(directory)"
-    local top_right="$(git_prompt_info)$(conda_prompt_info)"
-    local bottom_left="$(set_color)└>$(reset) "
-    local bottom_right="$(current_time)"
-
-    PROMPT="$(fill-line "$top_left" "$top_right")"$'\n'$bottom_left
-    RPROMPT=$bottom_right
+    local pad=${(pl.$pad_len..━.)}  # pad_len spaces
+    echo ${1}$(set_color)${pad}$(reset)${2}
 }
 
 function prompt-length() {
@@ -62,10 +62,20 @@ function prompt-length() {
     echo $x
 }
 
+function set-prompt() {
+    local top_left="$(set_color)┏$(hardware)$(chyph)$(directory)"
+    local top_right="$(git_prompt_info)$(conda_prompt_info)$(set_color)━┓$(reset)"
+    local bottom_left="$(set_color)┗━>$(reset) "
+    local bottom_right="$(chyph)$(chyph)$(current_time)$(set_color)━┛$(reset)"
+
+    PROMPT="$(fill-line "$top_left" "$top_right")"$'\n'$bottom_left
+    RPROMPT=$bottom_right
+}
+
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-prompt
 
 ZSH_THEME_GIT_PROMPT_PREFIX="$(set_color)[$(reset)git:"
-ZSH_THEME_GIT_PROMPT_SUFFIX="$(set_color)]$(reset)-"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}x%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}o%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$(set_color)]$(reset)$(chyph)"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}x%{$reset%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}o%{$reset%}"
