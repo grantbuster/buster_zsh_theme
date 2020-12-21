@@ -1,9 +1,24 @@
 # Custom zsh theme by Grant Buster
 
-COLOR=066
+hardware() {
+    if [[ "%M" == "el"* ]]; then
+        echo "$(inbracket Eagle::%M)"
+    elif [[ "%M" == *"ip-172."* ]]; then
+        echo "$(inbracket EC2::%M)"
+    else
+        echo "$(inbracket "%M")"
+    fi
+}
 
 set_color() {
-	echo "%{$FG[$COLOR]%}"
+    if [[ "%M" == "el"* ]]; then
+        COLOR=088
+    elif [[ "%M" == *"ip-172"* ]]; then
+        COLOR=149
+    else
+        COLOR=066
+    fi
+    echo "%{$FG[$COLOR]%}"
 }
 
 reset() {
@@ -23,15 +38,11 @@ inbox() {
 }
 
 conda_prompt_info() {
-	echo "$(inbracket "conda:$CONDA_DEFAULT_ENV")"
+	echo "$(inbracket "conda::$CONDA_DEFAULT_ENV")"
 }
 
 directory() {
 	echo "$(inbracket "./%1/")"
-}
-
-hardware() {
-	echo "$(inbracket "%M")"
 }
 
 current_time() {
@@ -75,7 +86,7 @@ function set-prompt() {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-prompt
 
-ZSH_THEME_GIT_PROMPT_PREFIX="$(set_color)[$(reset)git:"
+ZSH_THEME_GIT_PROMPT_PREFIX="$(set_color)[$(reset)git::"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$(set_color)]$(reset)$(chyph)"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}x%{$reset%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}o%{$reset%}"
