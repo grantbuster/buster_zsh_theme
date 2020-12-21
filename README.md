@@ -6,7 +6,7 @@ Includes git and conda integration, hostname and working directory info, and cus
 
 To install with oh-my-zsh:
 ```
-https://github.com/grantbuster/buster_zsh_theme.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/buster_zsh_theme
+git clone https://github.com/grantbuster/buster_zsh_theme.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/buster_zsh_theme
 ```
 
 ### Screenshot
