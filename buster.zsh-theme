@@ -5,7 +5,7 @@ set_color() {
     # use "spectrum_ls" to see available colors.
     # default is 066
     if [[ "$HOSTNAME" == *"el"* ]]; then
-        COLOR=076
+        COLOR=002
     elif [[ "$HOSTNAME" == *"ip-172"* ]]; then
         COLOR=013
     else
