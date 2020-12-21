@@ -31,7 +31,7 @@ inbox() {
 }
 
 host_prompt_info() {
-    echo "$(inbracket $HOSTNAME)"
+    echo "$(inbracket %M)"
 }
 
 conda_prompt_info() {
