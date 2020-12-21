@@ -1,9 +1,17 @@
 # Custom zsh theme by Grant Buster
 
-COLOR=066
-
 set_color() {
-	echo "%{$FG[$COLOR]%}"
+    # custom colors for different hosts.
+    # use "spectrum_ls" to see available colors.
+    # default is 066
+    if [[ "$HOSTNAME" == *"el"* ]]; then
+        COLOR=076
+    elif [[ "$HOSTNAME" == *"ip-172"* ]]; then
+        COLOR=013
+    else
+        COLOR=066
+    fi
+    echo "%{$FG[$COLOR]%}"
 }
 
 reset() {
@@ -22,16 +30,16 @@ inbox() {
 	echo "$(set_color)┫$(reset)$1$(set_color)┣$(reset)"
 }
 
+host_prompt_info() {
+    echo "$(inbracket $HOSTNAME)"
+}
+
 conda_prompt_info() {
-	echo "$(inbracket "conda:$CONDA_DEFAULT_ENV")"
+	echo "$(inbracket "conda::$CONDA_DEFAULT_ENV")"
 }
 
 directory() {
 	echo "$(inbracket "./%1/")"
-}
-
-hardware() {
-	echo "$(inbracket "%M")"
 }
 
 current_time() {
@@ -63,7 +71,7 @@ function prompt-length() {
 }
 
 function set-prompt() {
-    local top_left="$(set_color)┏$(hardware)$(chyph)$(directory)"
+    local top_left="$(set_color)┏$(host_prompt_info)$(chyph)$(directory)"
     local top_right="$(git_prompt_info)$(conda_prompt_info)$(set_color)━┓$(reset)"
     local bottom_left="$(set_color)┗━>$(reset) "
     local bottom_right="$(chyph)$(chyph)$(current_time)$(set_color)━┛$(reset)"
@@ -75,7 +83,7 @@ function set-prompt() {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-prompt
 
-ZSH_THEME_GIT_PROMPT_PREFIX="$(set_color)[$(reset)git:"
+ZSH_THEME_GIT_PROMPT_PREFIX="$(set_color)[$(reset)git::"
 ZSH_THEME_GIT_PROMPT_SUFFIX="$(set_color)]$(reset)$(chyph)"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}x%{$reset%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}o%{$reset%}"
