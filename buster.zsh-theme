@@ -45,7 +45,7 @@ directory() {
 }
 
 current_time() {
-   echo "$(inbracket "%t")"
+   echo "$(inbracket "%T")"
 }
 
 function fill-line() {
