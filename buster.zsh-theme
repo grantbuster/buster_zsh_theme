@@ -1,4 +1,6 @@
 # Custom zsh theme by Grant Buster
+# useful unicode chars: ━┏┗ ┓┛  ─╭╰ ╮╯
+# use to search unicode chars: https://shapecatcher.com/
 
 set_color() {
     # custom colors for different hosts.
@@ -19,7 +21,7 @@ reset() {
 }
 
 chyph() {
-    echo "$(set_color)━$(reset)"
+    echo "$(set_color)─$(reset)"
 }
 
 inbracket() {
@@ -50,7 +52,7 @@ function fill-line() {
     local left_len=$(prompt-length $1)
     local right_len=$(prompt-length $2)
     local pad_len=$((COLUMNS - left_len - right_len - 1))
-    local pad=${(pl.$pad_len..━.)}  # pad_len spaces
+    local pad=${(pl.$pad_len..─.)}  # pad_len spaces
     echo ${1}$(set_color)${pad}$(reset)${2}
 }
 
@@ -71,10 +73,10 @@ function prompt-length() {
 }
 
 function set-prompt() {
-    local top_left="$(set_color)┏$(host_prompt_info)$(chyph)$(directory)"
-    local top_right="$(git_prompt_info)$(conda_prompt_info)$(set_color)━┓$(reset)"
-    local bottom_left="$(set_color)┗━>$(reset) "
-    local bottom_right="$(chyph)$(chyph)$(current_time)$(set_color)━┛$(reset)"
+    local top_left="$(set_color)╭$(host_prompt_info)$(chyph)$(directory)"
+    local top_right="$(git_prompt_info)$(conda_prompt_info)$(set_color)─╮$(reset)"
+    local bottom_left="$(set_color)╰─>$(reset) "
+    local bottom_right="$(chyph)$(chyph)$(current_time)$(set_color)─╯$(reset)"
 
     PROMPT="$(fill-line "$top_left" "$top_right")"$'\n'$bottom_left
     RPROMPT=$bottom_right
