@@ -9,5 +9,10 @@ To install with oh-my-zsh:
 git clone https://github.com/grantbuster/buster_zsh_theme.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/buster_zsh_theme
 ```
 
+And then in your .zshrc:
+```
+ZSH_THEME="buster_zsh_theme/buster"
+```
+
 ### Screenshot
 ![Screenshot](https://github.com/grantbuster/buster_zsh_theme/blob/master/screenshot.PNG)
