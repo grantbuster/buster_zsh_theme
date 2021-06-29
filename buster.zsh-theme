@@ -41,7 +41,7 @@ conda_prompt_info() {
 }
 
 directory() {
-	echo "$(inbracket "./%1/")"
+	echo "$(inbracket "/%1//")"
 }
 
 current_time() {
