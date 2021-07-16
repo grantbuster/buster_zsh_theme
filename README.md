@@ -15,4 +15,4 @@ ZSH_THEME="buster_zsh_theme/buster"
 ```
 
 ### Screenshot
-![Screenshot](https://github.com/grantbuster/buster_zsh_theme/blob/master/screenshot.PNG)
+![Screenshot](https://github.com/grantbuster/buster_zsh_theme/blob/main/screenshot.PNG)
