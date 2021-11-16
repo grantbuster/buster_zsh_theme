@@ -37,7 +37,11 @@ host_prompt_info() {
 }
 
 conda_prompt_info() {
-	echo "$(inbracket "conda::$CONDA_DEFAULT_ENV")"
+    if [[ -z "${CONDA_DEFAULT_ENV}" ]]; then
+        echo ""
+    else
+        echo "$(inbracket "conda::$CONDA_DEFAULT_ENV")"
+    fi
 }
 
 directory() {
