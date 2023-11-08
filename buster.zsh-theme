@@ -6,11 +6,13 @@ set_color() {
     # custom colors for different hosts.
     # use "spectrum_ls" to see available colors.
     # default is 066
-    if [[ "$HOSTNAME" == *"el"* ]]; then
+    if [[ "$HOST" == *"el"* ]]; then
         COLOR=002
-    elif [[ "$HOSTNAME" == *"ip-172"* ]]; then
+    elif [[ "$HOST" == *"kl"* ]]; then
+        COLOR=124
+    elif [[ "$HOST" == *"ip-172"* ]]; then
         COLOR=013
-    elif [[ "$HOSTNAME" == *"bbush"* ]]; then
+    elif [[ "$HOST" == *"bbush"* ]]; then
         COLOR=027
     else
         COLOR=066
