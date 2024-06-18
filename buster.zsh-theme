@@ -10,6 +10,8 @@ set_color() {
         COLOR=002
     elif [[ "$HOST" == *"kl"* ]]; then
         COLOR=124
+    elif [[ "$HOST" == *"x"*"c"*"s"*"b"*"n"* ]]; then
+        COLOR=124
     elif [[ "$HOST" == *"ip-172"* ]]; then
         COLOR=013
     elif [[ "$HOST" == *"bbush"* ]]; then
